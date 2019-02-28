@@ -96,13 +96,16 @@ export default {
             // }
             let data = this.data;
 
-            let xData = [], yData = [];
+            let xData = [], yData = [], line1 = [], line2 = [], line3 = [];
 
            
             data.forEach((item, i) => {
                 xData.push(formatDate(item.createTime));
 
                 yData[i] = [ item.startScore, item.endScore, item.lowScore, item.highScore ];
+                line1.push(item.lowScore);
+                line2.push(item.highScore);
+                line3.push((item.highScore + item.lowScore)/2);
             })
             // Data.push('');
             // Data.unshift('');
@@ -215,6 +218,39 @@ export default {
                                 borderColor: upColor, //上
                                 borderColor0: downColor //下
                             }
+                        }
+                    },
+                    {
+                        name:'最低',
+                        type:'line',
+                        smooth: true,
+                        showSymbol: false,
+                        data: line1,
+                        lineStyle: {
+                            color: '#dc0000',
+                            width: 1
+                        }
+                    },
+                    {
+                        name:'最高',
+                        type:'line',
+                        smooth: true,
+                        showSymbol: false,
+                        data: line2,
+                        lineStyle: {
+                            color: '#14c802',
+                            width: 1
+                        }
+                    },
+                    {
+                        name:'平均',
+                        type:'line',
+                        smooth: true,
+                        showSymbol: false,
+                        data: line3,
+                        lineStyle: {
+                            color: '#FFC125',
+                            width: 1
                         }
                     }
                 ]

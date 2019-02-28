@@ -2,7 +2,7 @@
   "name": "luochi",
   "version": "1.0.0",
   "license": "MIT",
-  "description": "洛阳洛齿物联网有限公司管理后台",
+  "description": "洛阳洛齿物联网有限公司管理后台git@github.com:jacobearl/luochi.git",
   "author": "lunzi",
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
