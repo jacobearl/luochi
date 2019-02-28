@@ -1,16 +1,16 @@
 <template>
     <section class="i-item-l">
 
-        <p v-if="item && item.equipmentName" class="f25 fb m5_0 c-tit">{{item.equipmentName}}</p>
-        <div class="ub ub-ac pb3" v-if="item">
+        <p v-if="item" class="f25 fb m5_0 c-tit">{{item.equipmentName || '　'}}</p>
+        <div class="ub ub-ac pb3">
             <div  class="ub-f1" :class="[ score && score.isUp ? 'c-gre' : 'c-red']">
                 <div class="ub ub-ac">
-                    <p class="f36 fb m5_0">{{item.realTimeScore && item.realTimeScore !== 'NaN' ? item.realTimeScore.toFixed(2) : '0.00'}}</p>
-                    <img :src="score && score.isUp ? up : down" class="iil-ico">
+                    <p class="f36 fb m5_0">{{item && item.realTimeScore && item.realTimeScore !== 'NaN' ? item.realTimeScore.toFixed(1) : '0.0'}}</p>
+                    <img v-if="item" :src="score && score.isUp ? up : down" class="iil-ico">
                 </div>
                 <div class="ub f22 fb">
-                    <p class="m5_0">{{item.startScore && item.startScore !== 'NaN' ? item.startScore.toFixed(2) : '0.00'}}</p>
-                    <p class="ml10 m5_0">{{score && score.percent}}%</p>
+                    <p class="m5_0">{{item && item.startScore && item.startScore !== 'NaN' ? item.startScore.toFixed(1) : '0.0'}}</p>
+                    <p class="ml10 m5_0">{{score && score.percent || '0.00'}}%</p>
                 </div>
             </div>
             <!-- <svg-icon icon-class="up" class="c-red f28 ml5"></svg-icon> -->
@@ -24,7 +24,7 @@
                 
                 <div v-for="lItem in item.warningList" class="ub f16 tx-c">
                     <p class="uw0 ub-f2 p10_0 m0 c-gray">{{lItem.sparePartName}}</p>
-                    <p class="uw0 ub-f1 p10_0 m0" :class="[ score && score.isUp ? 'c-gre' : 'c-red']">{{lItem.realTimeScore.toFixed(2)}}</p>
+                    <p class="uw0 ub-f1 p10_0 m0" :class="[ score && score.isUp ? 'c-gre' : 'c-red']">{{lItem.realTimeScore.toFixed(1)}}</p>
                 </div>
             </div>
             <div v-else class="pt30 tx-c c-6 f13">暂无数据</div>

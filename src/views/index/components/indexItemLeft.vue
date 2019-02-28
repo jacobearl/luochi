@@ -1,16 +1,16 @@
 <template>
     <section class="i-item-l">
 
-        <p v-if="item && item.proLineName" class="f26 fb m5_0 c-tit">{{item.proLineName}}</p>
-        <div class="ub ub-ac pb3" v-if="item && item.data">
+        <p class="f26 fb m5_0 c-tit">{{item && item.proLineName || '　'}}</p>
+        <div class="ub ub-ac pb3" v-if="item">
             <div  class="ub-f1" :class="[ score && score.isUp ? 'c-gre' : 'c-red']">
                 <div class="ub ub-ac">
-                    <p class="f36 fb m5_0">{{item.data.realTimeScore && item.data.realTimeScore !== 'NaN' ? item.data.realTimeScore.toFixed(2) : '0.00'}}</p>
-                    <img :src="score && score.isUp ? up : down" class="iil-ico">
+                    <p class="f36 fb m5_0">{{item.data && item.data.realTimeScore && item.data.realTimeScore !== 'NaN' ? item.data.realTimeScore.toFixed(1) : '0.0'}}</p>
+                    <img v-if="item.data" :src="score && score.isUp ? up : down" class="iil-ico">
                 </div>
                 <div class="ub f22 fb">
-                    <p class="m5_0">{{item.data.startScore && item.data.startScore !== 'NaN' ? item.data.startScore.toFixed(2) : '0.00'}}</p>
-                    <p class="ml10 m5_0">{{score && score.percent}}%</p>
+                    <p class="m5_0">{{item.data && item.data.startScore && item.data.startScore !== 'NaN' ? item.data.startScore.toFixed(1) : '0.0'}}</p>
+                    <p class="ml10 m5_0">{{score && score.percent || '0.00'}}%</p>
                 </div>
             </div>
             <!-- <svg-icon icon-class="up" class="c-red f28 ml5"></svg-icon> -->
@@ -24,7 +24,7 @@
                 
                 <div v-for="lItem in item.data.warningList" class="ub f16 tx-c">
                     <p class="uw0 ub-f2 p10_0 m0 c-gray">{{lItem.equipmentName}}</p>
-                    <p class="uw0 ub-f1 p10_0 m0" :class="[ score && score.isUp ? 'c-gre' : 'c-red']">{{lItem.realTimeScore.toFixed(2)}}</p>
+                    <p class="uw0 ub-f1 p10_0 m0" :class="[ score && score.isUp ? 'c-gre' : 'c-red']">{{lItem.realTimeScore.toFixed(1)}}</p>
                 </div>
             </div>
             <div v-else class="pt30 tx-c c-6 f13">暂无数据</div>

@@ -94,7 +94,9 @@ export default {
             period: 7,
 
             kLineData: null,
-            data: null
+            data: null,
+
+            timer: null
         }
     },
     components: {
@@ -103,6 +105,12 @@ export default {
     watch: {
         "$route"(val){
             this.init();
+        }
+    },
+    beforeDestroy(){
+
+        if (this.timer){
+            clearInterval(this.timer);
         }
     },
     mounted(){
@@ -165,7 +173,7 @@ export default {
 
         realtimeDataTimer(){
 
-            setInterval( this.getEquipmentRealtime, 60 * 1000)
+            this.timer = setInterval( this.getEquipmentRealtime, 60 * 1000)
         },
 
         switchColor(score){

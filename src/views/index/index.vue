@@ -6,7 +6,7 @@
         <div v-if="list" v-for="i in 2" class="ub i-wrap">
             <!-- <a href="#/index/details" class="cur uw0 ub-f1" v-for="j in 2"> -->
             <a href="javascript:void(0)" class="cur uw0 ub-f1" v-for="j in 2">
-                <el-card shadow="hover" class="i-card">
+                <el-card shadow="hover" class="i-card pr">
 
                     <div :id="'chartCon' + i + j" class="ub">
 
@@ -18,7 +18,9 @@
                         </div>
                     </div>
                     <!-- <index-table></index-table> -->
+                    <aside v-show="list[(i-1)*2+(j-1)].data === null" class="i-mask"></aside>
                 </el-card>
+
             </a>
             <!-- <a href="#/index/details" class="cur uw0 ub-f1">
                 <el-card shadow="hover" style="margin-left: 20px">
@@ -68,12 +70,21 @@ export default {
                 'https://topcoin.oss-cn-hangzhou.aliyuncs.com/front/pc_banner_3.jpg'
             ],
 
-            list: null
+            list: null,
+
+            timer: null
 
         }
     },
     components: {
         indexItemLeft, chartOfLine, chartOfKLine, indexTable
+    },
+
+    beforeDestroy(){
+
+        if (this.timer){
+            clearInterval(this.timer);
+        }
     },
     mounted(){
 
@@ -120,12 +131,15 @@ export default {
             APIGetProlineRealtime(ops).then(res => {
 
                 this.$set(this.list[index], 'data', res.data)
+            }, () => {
+
+                this.$set(this.list[index], 'data', null)
             })
         },
 
         realtimeDataTimer(){
 
-            setInterval(() => {
+            this.timer = setInterval(() => {
                 if (!this.list){
                     return;
                 }
@@ -159,4 +173,5 @@ export default {
 .i-wrap{padding: 20px 20px 0 0;}
 .i-wrap .i-card:nth-child(odd){margin-left:20px;}
 
+.i-mask{display: block;position:absolute;width:100%;height:100%;top:0;left:0;background-color: #f1f1f1; opacity: 0.6;}
 </style>

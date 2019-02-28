@@ -5,7 +5,7 @@
             <a href="#/index/detail" class="di-item ub ub-ver ub-pc">
                 <p class="f22 c-tit">{{item.sparePartName}}</p>
                 <div class="ub ub-ac ub-f1">
-                    <p class="f26" :class="[ score.isUp ? 'c-gre' : 'c-red']">{{item.realTimeScore && item.realTimeScore !== 'NaN' ? item.realTimeScore.toFixed(2) : '0.00'}}</p>
+                    <p class="f26" :class="[ score.isUp ? 'c-gre' : 'c-red']">{{item.realTimeScore && item.realTimeScore !== 'NaN' ? item.realTimeScore.toFixed(1) : '0.0'}}</p>
                     <img :src="score.isUp === false ? down : up" class="di-item-ico">
                 </div>
                 <div class="ub f19"  :class="[ score.isUp ? 'c-gre' : 'c-red']">
