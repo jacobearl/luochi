@@ -5,8 +5,8 @@
         </div> -->
         <div v-if="list" v-for="i in 2" class="ub i-wrap">
             <!-- <a href="#/index/details" class="cur uw0 ub-f1" v-for="j in 2"> -->
-            <a href="javascript:void(0)" class="cur uw0 ub-f1" v-for="j in 2">
-                <el-card shadow="hover" class="i-card pr">
+            <a href="javascript:void(0)" class="cur uw0 ub-f1" v-for="j in 2" >
+                <el-card shadow="hover" class="i-card pr" v-if="list[(i-1)*2+(j-1)]">
 
                     <div :id="'chartCon' + i + j" class="ub">
 
@@ -100,6 +100,7 @@ export default {
 
         getListData(){
 
+            
             APIGetProlineList().then(res => {
 
                 this.list = res.data;
@@ -126,7 +127,8 @@ export default {
         getProlineRealtime(proLineId, index){
 
             let ops = {
-                proLineId: proLineId
+                proLineId: proLineId,
+                isAll: false
             }
             APIGetProlineRealtime(ops).then(res => {
 
@@ -159,6 +161,10 @@ export default {
             APIGetProlineKData(ops).then(res => {
 
                 this.$set(this.list[index], 'kData', res.data)
+
+                // setInterval(() => {
+                //     this.$set(this.list[index], 'kData', this.list[index].kData.concat(res.data.slice(0,2)))
+                // }, 1000)
             })
         }
     }

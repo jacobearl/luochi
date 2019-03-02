@@ -53,7 +53,7 @@
                 <div class="ub" style="padding: 20px;">
                     <details-item-left style="margin:0" :item="data"></details-item-left>
                     <div class="d-img ub-f1">
-                        <img :src="yamoji">
+                        <img v-if="data" :src="'http://47.101.57.230/img/' + data.sort + '.jpg'">
                     </div>
                 </div>
                 <details-chart-of-k-line :W="leftChartStyle.W" :H="leftChartStyle.H" :period="period" :title="data && data.equipmentName" :data="kLineData" @switchKlineType="switchKlineType"></details-chart-of-k-line>

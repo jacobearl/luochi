@@ -1,7 +1,7 @@
 <template>
     <div class="login-container" :style="{'background-image': 'url(' + this.bgList[this.bgNum] + ')'}">
         <el-form class="login-form" autoComplete="on" :model="loginForm" :rules="loginRules" ref="loginForm" label-position="left">
-            <h3 class="title">洛阳洛齿物联网有限公司管理后台</h3>
+            <h3 class="title">贵州锦丰矿业有限公司管理后台</h3>
             <el-form-item prop="username">
                 <span class="svg-container svg-container_login">
                     <svg-icon icon-class="user" />

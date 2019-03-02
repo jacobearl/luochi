@@ -9,7 +9,7 @@
                     <img v-if="item" :src="score && score.isUp ? up : down" class="iil-ico">
                 </div>
                 <div class="ub f22 fb">
-                    <p class="m5_0">{{item && item.startScore && item.startScore !== 'NaN' ? item.startScore.toFixed(1) : '0.0'}}</p>
+                    <p class="m5_0 c-3">{{item && item.startScore && item.startScore !== 'NaN' ? item.startScore.toFixed(1) : '0.0'}}</p>
                     <p class="ml10 m5_0">{{score && score.percent || '0.00'}}%</p>
                 </div>
             </div>
