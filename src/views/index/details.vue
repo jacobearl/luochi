@@ -138,7 +138,7 @@ export default {
         },
 
         getEquipmentRealtime(){
-            this.data = null;
+            // this.data = null;
             let ops = {
                 deviceName: this.deviceName
             }
@@ -149,6 +149,18 @@ export default {
                 this.data.warningList.sort((a, b) => {
                     return a.sort - b.sort;
                 })
+
+
+                if (this.kLineData){
+                    
+                    let len =  this.kLineData.length - 1;
+
+                    this.$set(this.kLineData[len],  'startScore', this.data.startScore);
+                    this.$set(this.kLineData[len],  'endScore', this.data.endScore);
+                    this.$set(this.kLineData[len],  'lowScore', this.data.lowScore);
+                    this.$set(this.kLineData[len],  'highScore', this.data.highScore);
+                    this.$set(this.kLineData[len],  'createTime', this.data.createTime);
+                }
             })
         },
 

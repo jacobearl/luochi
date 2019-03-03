@@ -60,16 +60,19 @@ export default {
 
         getItemWidth(i){//3,4,2,4
             
-            let w = 0;
-            if (i <= 2){
-                w = '32.33%'
-            } else if (i > 2 && i <= 6){
-                w = '24%'
-            } else if (i > 6 && i <= 8){
-                w = '49%'
-            } else if (i > 8 && i <= 12){
-                w = '24%'
-            }
+            // let w = 0;
+            // if (i <= 2){
+            //     w = '32.33%'
+            // } else if (i > 2 && i <= 6){
+            //     w = '24%'
+            // } else if (i > 6 && i <= 8){
+            //     w = '49%'
+            // } else if (i > 8 && i <= 12){
+            //     w = '24%'
+            // }
+
+            let w = '49%';
+          
 
             return w;
         }

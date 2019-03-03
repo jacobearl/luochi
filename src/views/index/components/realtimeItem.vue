@@ -9,7 +9,7 @@
                     <img :src="score.isUp === false ? down : up" class="di-item-ico">
                 </div>
                 <div class="ub ub-ac ub-pc f19"  :class="[ score.isUp ? 'c-gre' : 'c-red']">
-                    <div class="">{{item && item.startScore && item.startScore !== 'NaN' ? item.startScore : '0'}}</div>
+                    <div class="c-3">{{item && item.startScore && item.startScore !== 'NaN' ? item.startScore : '0'}}</div>
                     <div class="ml15">{{score.percent || '0.00'}}%</div>
                 </div>
             </a>

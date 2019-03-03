@@ -8,7 +8,7 @@
             <a href="javascript:void(0)" class="cur uw0 ub-f1" v-for="j in 2" >
                 <el-card shadow="hover" class="i-card pr" v-if="list[(i-1)*2+(j-1)]">
 
-                    <div :id="'chartCon' + i + j" class="ub">
+                    <a :href="'#/index/realtimeScore?id=' + list[(i-1)*2+(j-1)].id + '&name=' + list[(i-1)*2+(j-1)].proLineName" :id="'chartCon' + i + j" class="ub">
 
                         <index-item-left :item="list[(i-1)*2+(j-1)]"></index-item-left>
 
@@ -16,7 +16,7 @@
                             <chart-of-line :item="list[(i-1)*2+(j-1)]" :colorType="j" class="ub-f1" :H="chartStyle.H" :W="chartStyle.W"></chart-of-line>
                             <chart-of-k-line :item="list[(i-1)*2+(j-1)]" :colorType="j" class="ub-f1" :H="chartStyle.H" :W="chartStyle.W"></chart-of-k-line>
                         </div>
-                    </div>
+                    </a>
                     <!-- <index-table></index-table> -->
                     <aside v-show="list[(i-1)*2+(j-1)].data === null" class="i-mask"></aside>
                 </el-card>
@@ -132,7 +132,19 @@ export default {
             }
             APIGetProlineRealtime(ops).then(res => {
 
-                this.$set(this.list[index], 'data', res.data)
+                let realData = res.data;
+                this.$set(this.list[index], 'data', realData)
+
+                if (this.list[index].kData){
+
+                    let len =  this.list[index].kData.length - 1;
+
+                    this.$set(this.list[index].kData[len],  'startScore', realData.startScore);
+                    this.$set(this.list[index].kData[len],  'endScore', realData.endScore);
+                    this.$set(this.list[index].kData[len],  'lowScore', realData.lowScore);
+                    this.$set(this.list[index].kData[len],  'highScore', realData.highScore);
+                    this.$set(this.list[index].kData[len],  'createTime', realData.createTime);
+                }
             }, () => {
 
                 this.$set(this.list[index], 'data', null)
