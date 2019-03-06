@@ -1,7 +1,7 @@
 <template>
     <section class="logo-wrap">
         <img :src="logo">
-        <div>乌兰察布中联水泥有限公司</div>
+        <div>贵州锦丰矿业有限公司</div>
         <div>管理平台</div>
     </section>
 </template>

@@ -53,7 +53,7 @@
                 <div class="ub" style="padding: 20px;">
                     <details-item-left style="margin:0" :item="data"></details-item-left>
                     <div class="d-img ub-f1">
-                        <img :src="yamoji">
+                        <img v-if="data" :src="'http://47.101.57.230/img/' + data.sort + '.jpg'">
                     </div>
                 </div>
                 <details-chart-of-k-line :W="leftChartStyle.W" :H="leftChartStyle.H" :period="period" :title="data && data.equipmentName" :data="kLineData" @switchKlineType="switchKlineType"></details-chart-of-k-line>
@@ -138,7 +138,7 @@ export default {
         },
 
         getEquipmentRealtime(){
-            this.data = null;
+            // this.data = null;
             let ops = {
                 deviceName: this.deviceName
             }
@@ -149,6 +149,18 @@ export default {
                 this.data.warningList.sort((a, b) => {
                     return a.sort - b.sort;
                 })
+
+
+                if (this.kLineData){
+                    
+                    let len =  this.kLineData.length - 1;
+
+                    this.$set(this.kLineData[len],  'startScore', this.data.startScore);
+                    this.$set(this.kLineData[len],  'endScore', this.data.endScore);
+                    this.$set(this.kLineData[len],  'lowScore', this.data.lowScore);
+                    this.$set(this.kLineData[len],  'highScore', this.data.highScore);
+                    this.$set(this.kLineData[len],  'createTime', this.data.createTime);
+                }
             })
         },
 
