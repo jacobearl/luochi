@@ -1,9 +1,15 @@
 <template>
     <section>
 
-        <div class="ub dcok-tit">
+        <div class="ub ub-ac dcok-tit">
             <p class="c-tit m0">{{title}} -</p>
             <p class="m0 ml5">{{curTab.text}}</p>
+            <div class="ub-f1 tx-c f13 c-6">预计离警戒线还有<span class="c-red fb">223</span>天</div>
+            <div class="ub dock-txt-wrap ub-ac">
+                <div v-for="(item, i) in list" class="uw0 ub-f1 dock-txt f12" :class="{'active': curNum === i}" @click="switchType(item.mul)">
+                    {{item.text}}
+                </div>
+            </div>
         </div>
         <div class="chart-container"> 
             <ECharts 
@@ -17,11 +23,6 @@
             </ECharts>
             <aside v-if="!chartOptions" class="chart-loading f12">加载中...</aside>
 
-        </div>
-        <div class="ub dock-txt-wrap">
-            <div v-for="(item, i) in list" class="uw0 ub-f1 dock-txt f12" :class="{'active': curNum === i}" @click="switchType(item.mul)">
-                {{item.text}}
-            </div>
         </div>
     </section>
 </template>
@@ -44,10 +45,10 @@ export default {
 
             curNum: 0,
             list: [
-                { name: 'week', mul: 7, text: '一周数据图'},
-                { name: 'month', mul: 30, text: '一月数据图'},
-                { name: 'quarter', mul: 90, text: '一季度数据图'},
-                { name: 'year', mul: 365, text: '一年数据图'}
+                { name: 'week', mul: 7, text: '周数据'},
+                { name: 'month', mul: 30, text: '月数据'},
+                { name: 'quarter', mul: 90, text: '季度数'},
+                { name: 'year', mul: 365, text: '年数据'}
             ],
 
             chartInitOptions: {
@@ -159,14 +160,19 @@ export default {
 
                 grid: {
                     top: '10%',
-                    bottom: '12%',
-                    left: '9%',
-                    right: '6%'
+                    bottom: '8%',
+                    left: '8%',
+                    right: '8%'
                 },
                 xAxis:  {
                     type: 'category',
                     boundaryGap: false,
                     data: xData,
+                    splitLine: {
+                        lineStyle: {
+                            type: 'dashed'
+                        }
+                    },
                     axisTick: { //去掉刻度点样式
                         show: false
                     },
@@ -181,6 +187,11 @@ export default {
                     type: 'value',
                     axisLabel: {
                         formatter: '{value} '
+                    },
+                    splitLine: {
+                        lineStyle: {
+                            type: 'dashed'
+                        }
                     },
                     splitArea: {
                         show: true
@@ -220,28 +231,28 @@ export default {
                             }
                         }
                     },
-                    {
-                        name:'最低',
-                        type:'line',
-                        smooth: true,
-                        showSymbol: false,
-                        data: line1,
-                        lineStyle: {
-                            color: '#dc0000',
-                            width: 1
-                        }
-                    },
-                    {
-                        name:'最高',
-                        type:'line',
-                        smooth: true,
-                        showSymbol: false,
-                        data: line2,
-                        lineStyle: {
-                            color: '#14c802',
-                            width: 1
-                        }
-                    },
+                    // {
+                    //     name:'最低',
+                    //     type:'line',
+                    //     smooth: true,
+                    //     showSymbol: false,
+                    //     data: line1,
+                    //     lineStyle: {
+                    //         color: '#dc0000',
+                    //         width: 1
+                    //     }
+                    // },
+                    // {
+                    //     name:'最高',
+                    //     type:'line',
+                    //     smooth: true,
+                    //     showSymbol: false,
+                    //     data: line2,
+                    //     lineStyle: {
+                    //         color: '#14c802',
+                    //         width: 1
+                    //     }
+                    // },
                     {
                         name:'平均',
                         type:'line',
@@ -292,9 +303,9 @@ export default {
 
 <style scoped>
 .dcok-tit{padding: 20px 20px 0;font-size: 22px;color: #4359a0;font-weight: bold;}
-.dock-txt-wrap{padding: 17px 17px 17px 7px;}
-.dock-txt{margin-left: 7px;padding: 10px 0;background-color: #c8d5ea;color:#fff;text-align: center;border-radius: 3px;-webkit-border-radius: 3px;font-weight: bold;cursor: pointer;}
-.dock-txt.active{background-color: #92a9cc;}
+/*.dock-txt-wrap{padding: 17px 17px 17px 7px;}*/
+.dock-txt{margin-left: 7px;font-weight: bold;cursor: pointer;color: #92a9cc;}
+.dock-txt.active{color: #4359a0;}
 .chart-container, .my-chart{position: relative;width: 100%;height:100%;}
 .chart-loading{padding-top: 60px;text-align: center;color:#999;}
 

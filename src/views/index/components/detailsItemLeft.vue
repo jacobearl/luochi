@@ -1,14 +1,14 @@
 <template>
-    <section class="i-item-l">
+    <section class="i-item-l" >
 
-        <p v-if="item" class="f25 fb m5_0 c-tit">{{item.equipmentName || '　'}}</p>
-        <div class="ub ub-ac pb3">
+        <!-- <p v-if="item" class="f25 fb m5_0 c-tit">{{item.equipmentName || '　'}}</p> -->
+        <div class="ub ub-ac pb3 ub-pc">
             <div  class="ub-f1" :class="[ score && score.isUp ? 'c-gre' : 'c-red']">
-                <div class="ub ub-ac">
+                <div class="ub ub-ac ub-pc">
                     <p class="f36 fb m5_0">{{item && item.realTimeScore && item.realTimeScore !== 'NaN' ? item.realTimeScore.toFixed(1) : '0.0'}}</p>
                     <img v-if="item" :src="score && score.isUp ? up : down" class="iil-ico">
                 </div>
-                <div class="ub f22 fb">
+                <div class="ub ub-pc f22 fb">
                     <p class="m5_0 c-3">{{item && item.startScore && item.startScore !== 'NaN' ? item.startScore.toFixed(1) : '0.0'}}</p>
                     <p class="ml10 m5_0">{{score && score.percent || '0.00'}}%</p>
                 </div>
@@ -89,7 +89,7 @@ export default {
 
 
 <style>
-.i-item-l{width: 33%;min-height:350px;min-width: 150px;margin: 20px 0 0;padding: 10px 10px 0;border: 1px solid #f5f5f5;border-radius: 3px;-webkit-border-radius: 3px;}
+.i-item-l{width: 100%;min-height:350px;min-width: 150px;margin: 20px 0 0;padding: 10px 10px 0;border: 1px solid #f5f5f5;border-radius: 3px;-webkit-border-radius: 3px;}
 .i-item-lb{padding: 8px 0 0;border-top:1px solid #f5f5f5;}
 .i-item-th{margin:0;padding: 6px 0;background-color: #f2f4f5;font-weight: bold;text-align: center;}
 .iil-ico{width: 20px;margin-left: 15px;}

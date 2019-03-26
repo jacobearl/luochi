@@ -45,7 +45,7 @@ export default {
     computed: {
  
         chartOptions(){
-            if (this.H === 0 || !this.data){
+            if (this.H === 0){
                 return;
             }
             // let dpr = this.dpr || 1;
@@ -78,7 +78,6 @@ export default {
                 }
             })
             return {
-                backgroundColor: '#f9f9f9',
                 tooltip: {
                     trigger: 'axis'
                 },
@@ -96,10 +95,10 @@ export default {
                 //     }
                 // },
                 grid: {
-                    top: '22%',
-                    bottom: '20%',
-                    left: '6%',
-                    right: '6%'
+                    top: '20%',
+                    bottom: '18%',
+                    left: '18%',
+                    right: '12%'
                 },
                 xAxis:  {
                     type: 'category',
@@ -120,7 +119,7 @@ export default {
                         formatter: '{value} '
                     },
                     splitArea: {
-                        show: false
+                        show: true
                     },
                     splitLine: {
                         show: false
@@ -211,7 +210,7 @@ export default {
 
 <style scoped>
 .chart-container, .my-chart{position: relative;width: 100%;height:100%;}
-.chart-loading{padding-top: 20px;text-align: center;color:#999;}
+.chart-loading{padding-top: 60px;text-align: center;color:#999;}
 
 </style>
 

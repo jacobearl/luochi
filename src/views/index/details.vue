@@ -5,68 +5,32 @@
         </div>
  -->        
         <div class="d-wrap ub">
-           <!--  <div class="d-item">
-                <div class="d-item-tit">第一部分</div>
-                <div class="d-item-con">
-                    <a href="#/index/detail" class="d-item-li" :class="[switchColor(85)]">立磨减速机 <span class="">85分</span></a>
-                </div>
+            <div id="dLeft" class="ub-f1 ub ub-ver">
+                <el-card shadow="hover" >
+                    <details-chart-of-k-line class="ub-f1" :W="leftChartStyle.W" :H="leftChartStyle.H * 0.8" :period="period" :title="data && data.equipmentName" :data="kLineData" @switchKlineType="switchKlineType"></details-chart-of-k-line>
+                </el-card>
+                <el-card shadow="hover" class="mt20 p20">
+                    <details-chart-of-line :data="data"  :H="leftChartStyle.H * 0.2"></details-chart-of-line>
+                </el-card>
             </div>
-            <div class="d-item">
-                <div class="d-item-tit">第二部分</div>
-                <div class="d-item-con">
-                    <a href="#/index/detail" class="d-item-li" :class="[switchColor(94)]">窑主减速机 <span class="">94分</span></a>
-                </div>
-            </div>
-            <div class="d-item">
-                <div class="d-item-tit">第三部分</div>
-                <div class="d-item-con">
-                    <a href="#/index/detail" class="d-item-li" :class="[switchColor(65)]">煤磨减速机 <span class="">65分</span></a>
-                </div>
-            </div>
-            <div class="d-item">
-                <div class="d-item-tit">第四部分</div>
-                <div class="d-item-con">
-                    <a href="#/index/detail" class="d-item-li" :class="[switchColor(78)]">一号辊压机动辊减速机 <span class="">78分</span></a>
-                    <a href="#/index/detail" class="d-item-li" :class="[switchColor(80)]">一号辊压机定辊减速机 <span class="">80分</span></a>
-                    <a href="#/index/detail" class="d-item-li" :class="[switchColor(65)]">二号辊压机动辊减速机 <span class="">65分</span></a>
-                    <a href="#/index/detail" class="d-item-li" :class="[switchColor(53)]">二号辊压机定辊减速机 <span class="">53分</span></a>
-                </div>
-            </div>
-            <div class="d-item">
-                <div class="d-item-tit">第五部分</div>
-                <div class="d-item-con">
-                    <a href="#/index/detail" class="d-item-li" :class="[switchColor(81)]">一号中心传动减速机 <span class="">81分</span></a>
-                    <a href="#/index/detail" class="d-item-li" :class="[switchColor(92)]">二号中心传动减速机 <span class="">92分</span></a>
-                </div>
-            </div>
-            <div class="d-item">
-                <div class="d-item-tit">第六部分</div>
-                <div class="d-item-con">
-                    <a href="#/index/detail" class="d-item-li" :class="[switchColor(75)]">入库头提减速机 <span class="">75分</span></a>
-                    <a href="#/index/detail" class="d-item-li" :class="[switchColor(55)]">入窑头提减速机（北） <span class="">55分</span></a>
-                    <a href="#/index/detail" class="d-item-li" :class="[switchColor(81)]">入窑头提减速机（南） <span class="">81分</span></a>
-                    <a href="#/index/detail" class="d-item-li" :class="[switchColor(90)]">斜拉链减速机 <span class="">90分</span></a>
-                </div>
-            </div> -->
-            
-            <el-card id="dLeft" shadow="hover" class="i-card">
-                <div class="ub" style="padding: 20px;">
-                    <details-item-left style="margin:0" :item="data"></details-item-left>
-                    <div class="d-img ub-f1">
+            <el-card id="dRight" shadow="hover" class="i-card">
+                <a :href="'#/index/detail?deviceName=' + deviceName" class="" style="display:block;padding: 20px;">
+                    <p v-if="data" class="f25 fb m5_0">{{data.equipmentName || '　'}}</p>
+                    <div class="d-img">
                         <img v-if="data" :src="'http://47.101.57.230/img/' + data.sort + '.jpg'">
                     </div>
-                </div>
-                <details-chart-of-k-line :W="leftChartStyle.W" :H="leftChartStyle.H" :period="period" :title="data && data.equipmentName" :data="kLineData" @switchKlineType="switchKlineType"></details-chart-of-k-line>
+                    <details-item-left style="margin:0" :item="data"></details-item-left>
+                </a>
             </el-card>
 
-            <div class="i-card-m ub ub-ver">
+           <!--  <div class="i-card-m ub ub-ver">
                 <details-question colorType="0" class="ub-f1 uh0"></details-question>
                 <details-question colorType="1" class="ub-f1 uh0 mt20"></details-question>
-            </div>
+            </div> -->
 
-            <div class="i-card-r ub ub-ver">
+           <!--  <div class="i-card-r ub ub-ver">
                 <details-item v-for="(cItem, j) in (data && data.warningList)" :item="cItem" :class="[j!==0 ? 'mt15' : '']" class="uh0 ub-f1"></details-item>
-            </div>
+            </div> -->
             
         </div>
     </div>
@@ -74,6 +38,7 @@
 
 <script>
 import detailsChartOfKLine from './components/detailsChartOfKLine'
+import detailsChartOfLine from './components/detailsChartOfLine'
 import detailsItemLeft from './components/detailsItemLeft'
 import detailsQuestion from './components/detailsQuestion'
 import detailsItem from './components/detailsItem'
@@ -100,7 +65,7 @@ export default {
         }
     },
     components: {
-        detailsItemLeft, detailsChartOfKLine, detailsQuestion, detailsItem
+        detailsItemLeft, detailsChartOfKLine, detailsChartOfLine, detailsQuestion, detailsItem
     },
     watch: {
         "$route"(val){
@@ -121,14 +86,14 @@ export default {
 
         init(){
 
-            let W = document.getElementById("dLeft").offsetWidth;
+            // let W = document.getElementById("dLeft").offsetWidth;
+            // // let H = document.getElementById("dRight").offsetHeight;
 
-            this.leftChartStyle.W = W;
-            this.leftChartStyle.H = W*9/16;
-
+            // this.leftChartStyle.W = W;
+            // this.leftChartStyle.H = 625;
 
             this.deviceName = this.$route.query.deviceName;
-            this.period = 7,
+            this.period = 7;
 
             this.getEquipmentRealtime();
             this.getEquipmentKData();
@@ -146,10 +111,9 @@ export default {
 
                 this.data = res.data;
 
-                this.data.warningList.sort((a, b) => {
-                    return a.sort - b.sort;
-                })
-
+                // this.data.warningList.sort((a, b) => {
+                //     return a.sort - b.sort;
+                // })
 
                 if (this.kLineData){
                     
@@ -161,6 +125,15 @@ export default {
                     this.$set(this.kLineData[len],  'highScore', this.data.highScore);
                     this.$set(this.kLineData[len],  'createTime', this.data.createTime);
                 }
+
+
+                this.$nextTick(() => {
+                    let W = document.getElementById("dLeft").offsetWidth;
+                    let H = document.getElementById("dRight").offsetHeight;
+
+                    this.leftChartStyle.W = W;
+                    this.leftChartStyle.H = H;
+                })
             })
         },
 
@@ -223,8 +196,8 @@ export default {
 .d-item-li.red{background-color: #F95F56;}
 
 
-.i-card{width: 34%;}
-.d-img{display: flex;align-items: center;margin-left: 15px;border: 1px solid #f5f5f5;border-radius: 3px;-webkit-border-radius: 3px;}
+.i-card{width: 28%;margin-left: 20px;cursor: pointer;}
+.d-img{display: flex;align-items: center;margin:20px 0;border: 1px solid #f5f5f5;border-radius: 3px;-webkit-border-radius: 3px;}
 .d-img>img{display: block;width:100%;display: table-cell;vertical-align: middle;align-items: center;}
 .i-card-m{position: relative;width: 27%;margin-left: 1.5%;}
 .i-card-r{position: relative;width: 36%;margin-left: 1.5%;}

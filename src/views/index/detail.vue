@@ -1,51 +1,90 @@
 <template>
     <div>
-<!--         <div class="i-hd">
-            <el-tag size="small">立体研磨机</el-tag>
-        </div> -->
-        
-        <div class="d-wrap">
-            <div class="d-img">
-                <img :src="img">
-            </div>
-            <chart-of-line class="d-chart" colorType="1" title="整机运行趋势"></chart-of-line>
 
-            <div class="d-table">
-                <detail-table></detail-table>
-            </div>
+        <div class="d-wrap">
+            
+
+            <details-item v-for="(cItem, j) in (data && data.warningList)" :item="cItem" class="d-item"></details-item>
+            
+            <p class="p30 c-9" v-if="data && data.warningList && data.warningList.length === 0">暂无数据</p>
         </div>
     </div>
 </template>
 
 <script>
-import chartOfLine from './components/chartOfLine'
-import detailTable from './components/detailTable'
+import detailsItem from './components/detailsItem'
 import yamoji from 'static/img/yanmoji.png'
+
+import { APIGetEquipmentRealtime } from '@/api/luochi'
 export default {
-    name: 'index',
+    name: 'detailss',
     data(){
         return {
-            img: yamoji,
+            yamoji: yamoji,
 
-            id: null
+
+            deviceName: this.$route.query.deviceName,
+            period: 7,
+
+            data: null,
+
+            timer: null
         }
     },
     components: {
-        chartOfLine, detailTable
+       detailsItem
     },
     watch: {
         "$route"(val){
             this.init();
         }
     },
+    beforeDestroy(){
+
+        if (this.timer){
+            clearInterval(this.timer);
+        }
+    },
     mounted(){
 
+        this.init();
     },
     methods: {
 
         init(){
-             this.id = this.$route.query.id;
+
+            this.deviceName = this.$route.query.deviceName;
+            this.period = 7;
+
+            this.getEquipmentRealtime();
+
+            this.realtimeDataTimer();
+
         },
+
+        getEquipmentRealtime(){
+            // this.data = null;
+            let ops = {
+                deviceName: this.deviceName
+            }
+            APIGetEquipmentRealtime(ops).then(res => {
+
+                this.data = res.data;
+
+                this.data.warningList.sort((a, b) => {
+                    return a.sort - b.sort;
+                })
+
+            })
+        },
+
+
+
+        realtimeDataTimer(){
+
+            this.timer = setInterval( this.getEquipmentRealtime, 60 * 1000)
+        },
+
         switchColor(score){
             score = parseInt(score);
             let clazz = ''
@@ -62,12 +101,11 @@ export default {
     }
 }
 </script>
-
+<style>
+.d-wrap .el-card__body{padding: 0;}
+</style>
 <style scoped>
-.i-hd{background-color: #f9f9f9;padding: 10px 20px;}
-.d-wrap{}
-.d-chart{width: 95%;height: 300px;margin: 20px auto;}
-.d-img{margin: 20px 0;text-align: center;}
-.d-img>img{max-width: 100%;}
-.d-table{padding: 0 30px 30px;}
+.d-wrap{padding: 0 20px 20px;margin: 20px 0;}
+.d-wrap:after{content: "";display:block;clear:both;}
+.d-item{float:left;display: block;width: 48%;height: 182px;margin: 0 1.5% 1.5% 0;}
 </style>

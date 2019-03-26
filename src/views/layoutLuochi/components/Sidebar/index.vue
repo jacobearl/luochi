@@ -91,7 +91,7 @@ export default {
                                         id: third.id,
                                         deviceName: third.deviceName,
                                         name: third.sparePartName,
-                                        path: '/details'
+                                        path: '/detail'
                                     })
                                 })
                             }

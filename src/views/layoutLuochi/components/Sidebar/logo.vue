@@ -1,8 +1,8 @@
 <template>
     <section class="logo-wrap">
         <img :src="logo">
-        <div>贵州锦丰矿业有限公司</div>
-        <div>管理平台</div>
+        <div>中国水泥管理平台</div>
+        <!-- <div>管理平台</div> -->
     </section>
 </template>
 
@@ -13,7 +13,7 @@
 </style>   
 <script>
 
-import logo from 'static/img/logo.png'
+import logo from 'static/img/logo1.png'
 export default {
     data(){
         return {
